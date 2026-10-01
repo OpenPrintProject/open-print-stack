@@ -4,6 +4,8 @@ An open-source platform for running a 3D print farm: monitor and control printer
 
 - [Feature plan](docs/feature-plan.md)
 - [Architecture](docs/architecture.md)
+- [Milestone 1](docs/milestone-1.md)
+- Printer notes: [Elegoo Centauri Carbon 2](docs/printers/elegoo-cc2.md)
 - [Contributing](CONTRIBUTING.md)
 
 ## Development
