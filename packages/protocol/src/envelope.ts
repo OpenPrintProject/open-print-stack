@@ -9,6 +9,8 @@ export const messageSchema = z.object({
 	id: z.string().min(1),
 	type: z.string().min(1),
 	printerId: z.string().min(1).optional(),
+	/** On a reply, the `id` of the message it answers. */
+	replyTo: z.string().min(1).optional(),
 	ts: z.number().int().nonnegative(),
 	payload: z.unknown(),
 });
