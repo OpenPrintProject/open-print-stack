@@ -196,8 +196,9 @@ How the agent and the cloud talk: a WebSocket (wss) connection carrying JSON mes
 type Message = {
   v: 1;                  // protocol version
   id: string;            // unique, used for replies and avoiding duplicates
-  type: string;          // e.g. "state.patch", "event", "cmd.pause", "cmd.result"
+  type: string;          // e.g. "state.patch", "event", "cmd.print.pause", "cmd.result"
   printerId?: string;
+  replyTo?: string;      // on a reply (command result, event ack, hello), the id it answers
   ts: number;
   payload: unknown;      // checked against a Zod schema per type
 };
