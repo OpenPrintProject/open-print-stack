@@ -14,17 +14,22 @@ You need Node 24+, pnpm (`corepack enable pnpm`), Bun, and Docker (e.g. OrbStack
 
 ```bash
 pnpm install
-cp .env.example .env
-pnpm db:up      # start Postgres and Redis
-pnpm dev        # run the API, web app and agent in watch mode
+cp .env.example .env   # then set BETTER_AUTH_SECRET: openssl rand -base64 32
+pnpm db:up             # start Postgres and Redis
+pnpm db:migrate        # create the tables
+pnpm dev               # run the API, web app and agent in watch mode
 ```
+
+Open the web app at http://localhost:5173 and create an account. The API is served under `/api`, which the web dev server proxies to port 3000.
 
 | Command | What it does |
 |---|---|
 | `pnpm dev` | Run everything in watch mode |
 | `pnpm build` | Build the web app and the agent program |
 | `pnpm typecheck` | Type-check every package |
-| `pnpm test` | Run all tests |
+| `pnpm test` | Run all tests (the API tests need `pnpm db:up`; they use a separate `ops_test` database) |
+| `pnpm db:migrate` | Apply database migrations |
+| `pnpm --filter @ops/db db:generate --name <name>` | Write a migration after changing the schema |
 | `pnpm lint` | Check formatting and lint rules |
 | `pnpm format` | Fix formatting and safe lint issues |
 

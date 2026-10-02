@@ -5,11 +5,10 @@ export default defineConfig({
 	plugins: [react()],
 	server: {
 		port: 5173,
+		// The API serves everything under /api, so the app and its session
+		// cookie share one origin.
 		proxy: {
-			"/api": {
-				target: "http://localhost:3000",
-				rewrite: (path) => path.replace(/^\/api/, ""),
-			},
+			"/api": "http://localhost:3000",
 		},
 	},
 });

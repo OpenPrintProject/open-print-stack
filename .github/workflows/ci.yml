@@ -8,6 +8,22 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18-alpine
+        env:
+          POSTGRES_USER: ops
+          POSTGRES_PASSWORD: ops
+          POSTGRES_DB: ops
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ops"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgres://ops:ops@localhost:5432/ops
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
